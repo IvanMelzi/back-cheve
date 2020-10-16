@@ -21,7 +21,9 @@ router.route("/factories").get(factoryController.index).post(factoryController.c
 router.route("/factories/:id").get(factoryController.show)
 router.route("/factories/:id").get(factoryController.show).put(factoryController.update)
 router.route("/factories/:id").get(factoryController.show).put(factoryController.update).delete(factoryController.delete)
+
 //curl -X POST --data "name=Allende&location=Guanajuato" http://localhost:3000/factories
 //curl -X PUT --data "name=Cervecería Allende" http://localhost:3000/factories/1
+//curl -X DELETE  http://localhost:3000/factories/1
 
 export default router

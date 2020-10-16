@@ -1,16 +1,16 @@
-import { BeerModel } from './beer.model';
+import { FactoryModel } from './factory.model';
 import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
 import { database } from "../src/config/database";
 
-export class FactoryModel extends Model {
+export class BeerModel extends Model {
   public id!: number;
   public name!: string;
-  public location!: string;
+  public price!: number;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-FactoryModel.init(
+BeerModel.init(
     {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
@@ -21,15 +21,19 @@ FactoryModel.init(
             type: new DataTypes.STRING(128),
             allowNull: false,
         },
-        location: {
-            type: new DataTypes.STRING(128),
+        price: {
+            type: new DataTypes.INTEGER,
+            allowNull: false,
+        },
+        factoryId: {
+            type: new DataTypes.INTEGER,
             allowNull: false,
         },
     },
     {
-        tableName: "factories",
+        tableName: "beers",
         sequelize: database,
     }
 );
 
-FactoryModel.sync({ force: true }).then(() => console.log("Factory table created"));
+BeerModel.sync({ force: true }).then(() => console.log("Beers table created"));
