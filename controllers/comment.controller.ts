@@ -1,28 +1,28 @@
-import { Beer } from './../src/models/beer.model';
 
 import { Request, Response } from "express";
-import { BeerModel } from "../models/beer.model";
+import { CommentModel } from "../models/comment.model";
 import { DestroyOptions, UpdateOptions } from "sequelize";
+import { Comment } from "../src/models/comment.model";
 
-export class BeerController {
+export class CommentController {
     public index(req: Request, res: Response) {
-        BeerModel.findAll<BeerModel>({})
-            .then((beers: Array<BeerModel>) => res.json(beers))
+        CommentModel.findAll<CommentModel>({})
+            .then((comments: Array<CommentModel>) => res.json(comments))
             .catch((err: Error) => res.status(500).json(err))
     }
 
     public create(req: Request, res: Response) {
-        const params: Beer = req.body
+        const params: Comment = req.body
 
-        BeerModel.create<BeerModel>(params)
-            .then((beer: BeerModel) => res.status(201).json(beer))
+        CommentModel.create<CommentModel>(params)
+            .then((comment: CommentModel) => res.status(201).json(comment))
             .catch((err: Error) => res.status(500).json(err))
     }
 
     public show(req: Request, res: Response) {
         const beerId: number = parseInt(req.params.id)
-        BeerModel.findByPk<BeerModel>(beerId)
-            .then((beer: BeerModel | null) => {
+        CommentModel.findByPk<CommentModel>(beerId)
+            .then((beer: CommentModel | null) => {
                 if (beer) {
                     res.json(beer)
                 } else {
@@ -34,14 +34,14 @@ export class BeerController {
 
     public update(req: Request, res: Response) {
         const beerId: number = parseInt(req.params.id)
-        const params: Beer = req.body
+        const params: Comment = req.body
     
         const update: UpdateOptions = {
             where: { id: beerId },
             limit: 1,
         };
     
-        BeerModel.update(params, update)
+        CommentModel.update(params, update)
             .then(() => res.status(202).json({ data: "success" }))
             .catch((err: Error) => res.status(500).json(err))
     }
@@ -53,7 +53,7 @@ export class BeerController {
             limit: 1,
         };
     
-        BeerModel.destroy(options)
+        CommentModel.destroy(options)
             .then(() => res.status(204).json({ data: "success" }))
             .catch((err: Error) => res.status(500).json(err));
     }

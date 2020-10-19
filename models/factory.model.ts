@@ -1,4 +1,3 @@
-import { BeerModel } from './beer.model';
 import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
 import { database } from "../src/config/database";
 
