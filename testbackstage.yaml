@@ -10,6 +10,7 @@ metadata:
     circleci.com/project-slug: github/example-org/artist-website
   tags:
     - java
+    - spring
 spec:
   type: website
   lifecycle: production
